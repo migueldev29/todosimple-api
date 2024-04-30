@@ -23,7 +23,7 @@ public class Task {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne //Relacionamento com user(uma task para um usuário)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
@@ -32,7 +32,6 @@ public class Task {
     @NotEmpty
     @Size(min = 1, max = 255)
     private String description;
-
 
     public Task() {
     }

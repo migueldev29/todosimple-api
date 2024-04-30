@@ -3,7 +3,6 @@ package com.migueldev.todosimple.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,19 +33,19 @@ public class User {
     private Long id;
 
     @Column(name = "username", length = 100, nullable = false, unique = true)
-    @NotNull(groups = CreateUser.class)
-    @NotEmpty(groups = CreateUser.class)
-    @Size(groups = CreateUser.class, min = 2, max = 100)
+    @NotNull(groups = CreateUser.class) //Aplica regra quando utilizar a interface CreateUser
+    @NotEmpty(groups = CreateUser.class) //
+    @Size(groups = CreateUser.class, min = 2, max = 100) //
     private String username;
 
-    @JsonProperty(access = Access.WRITE_ONLY)
+    @JsonProperty(access = Access.WRITE_ONLY) //Não exibir a senha visivelmente no JSON
     @Column(name = "password", length = 60, nullable = false)
-    @NotNull(groups = { CreateUser.class, UpdateUser.class })
-    @NotEmpty(groups = { CreateUser.class, UpdateUser.class })
-    @Size(groups = { CreateUser.class, UpdateUser.class }, min = 8, max = 60)
+    @NotNull(groups = { CreateUser.class, UpdateUser.class }) //Aplica regra quando utilizar a interface CreateUser e UpdateUser
+    @NotEmpty(groups = { CreateUser.class, UpdateUser.class }) //
+    @Size(groups = { CreateUser.class, UpdateUser.class }, min = 8, max = 60) //
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user") //Relacionamento(um usuário pode ter várias tasks) mapeado lá dentro de tasks pelo atributo user
     private List<Task> tasks = new ArrayList<Task>();
 
     public User() {
