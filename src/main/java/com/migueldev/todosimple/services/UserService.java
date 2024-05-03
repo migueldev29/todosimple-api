@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.migueldev.todosimple.models.User;
-import com.migueldev.todosimple.repositories.TaskRepository;
 import com.migueldev.todosimple.repositories.UserRepository;
 
 @Service
@@ -17,9 +16,6 @@ public class UserService {
     //Atributos da classe
     @Autowired
     private UserRepository userRepository;
-    
-    @Autowired
-    private TaskRepository taskRepository;
 
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
@@ -35,7 +31,6 @@ public class UserService {
     public User create(User obj) {
         obj.setId(null); //Define nulo, Proteção para não permitir receber um id no create para que usuários mal intencionados não possam atualizar um registro na função de create ao passar um id.
         obj = this.userRepository.save(obj);
-        this.taskRepository.saveAll(obj.getTasks());
         return obj;
     }
 
