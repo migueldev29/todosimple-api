@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.migueldev.todosimple.models.Task;
 import com.migueldev.todosimple.models.User;
 import com.migueldev.todosimple.repositories.TaskRepository;
+import com.migueldev.todosimple.services.exception.InvalidInputException;
 
 @Service
 public class TaskService {
@@ -43,10 +44,14 @@ public class TaskService {
     }
 
     @Transactional
-    public Task update(Task obj) {
+    public Task update(Long id, Task obj) {
         Task newObj = findById(obj.getId());
-        newObj.setDescription(obj.getDescription());
-        return this.taskRepository.save(newObj);
+        if(obj.getUser().getId() != newObj.getUser().getId()){
+            throw new InvalidInputException("Não é permitido alterar o usuário de uma tarefa!");
+        }else{
+            newObj.setDescription(obj.getDescription());
+            return this.taskRepository.save(newObj);
+        }
     }
 
     public void delete(Long id) {
