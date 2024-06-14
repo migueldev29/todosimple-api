@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.migueldev.todosimple.models.User;
 import com.migueldev.todosimple.repositories.UserRepository;
+import com.migueldev.todosimple.services.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
         Optional<User> user = this.userRepository.findById(id);
 
         //Caso encontre o ID então retorna o objeto de usuário, caso contrário retorna a RuntimeException com mensagem.
-        return user.orElseThrow(() -> new RuntimeException(
+        return user.orElseThrow(() -> new ObjectNotFoundException(
             "Usuário não encontrado! " + id + ", Tipo: " + User.class.getName()
         ));
     }
