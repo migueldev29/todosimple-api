@@ -26,6 +26,10 @@ public class UserSpringSecurity implements UserDetails {
         this.id = id;
         this.username = username;
         this.password = password;
+
+        /*
+         * A collection de authorities irá receber itens de SimpleGrantedAuthority Contendo a descrição do ProfileEnum por ex: ROLE_USER e ROLE_ADMIN
+        */
         this.authorities = profileEnums.stream().
                                 map(x -> new SimpleGrantedAuthority(x.getDescription())).
                                 collect(Collectors.toList());
@@ -51,7 +55,9 @@ public class UserSpringSecurity implements UserDetails {
         return true;
     }
 
+    //Identifica a existência de Perfil associado ao usuário "hasRole", Existe ROLE?
     public boolean hasRole(ProfileEnum profileEnum) {
+        //Verifica nos itens da lista de Authorities se contém um perfil ROLE_USER ou ROLE_ADMIN
         return getAuthorities().contains(new SimpleGrantedAuthority(profileEnum.getDescription()));
     }
     

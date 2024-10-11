@@ -41,7 +41,7 @@ public class UserService {
     public User create(User obj) {
         obj.setId(null); //Define nulo, Proteção para não permitir receber um id no create para que usuários mal intencionados não possam atualizar um registro na função de create ao passar um id.
         obj.setPassword(this.bCryptPasswordEncoder.encode(obj.getPassword()));
-        obj.setProfiles(Stream.of(ProfileEnum.USER.getCode()).collect(Collectors.toSet()));
+        obj.setProfiles(Stream.of(ProfileEnum.USER.getCode()).collect(Collectors.toSet())); //Este metodo setProfiles foi criado pelo Lombok na classe User após ter definido ela como: private Set<Integer> profiles = new HashSet<>();
         obj = this.userRepository.save(obj);
         return obj;
     }

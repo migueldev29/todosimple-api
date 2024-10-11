@@ -69,12 +69,18 @@ public class User {
     private List<Task> tasks = new ArrayList<Task>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @CollectionTable(name = "user_profile")
+    @JsonProperty(access = Access.WRITE_ONLY) //Foi colocado para que quando buscar um usuário não trazer as Tasks, apenas posso inserir tasks para o usuário.
+    @CollectionTable(name = "user_profile") //Tabela nova que associa o usuário e perfil
     @Column(name = "profile", nullable = false)
     private Set<Integer> profiles = new HashSet<>();
 
-    public Set<ProfileEnum> getProfile() {
+    public Set<ProfileEnum> getProfiles() {
+        /*  
+         *  Stream = Transformo em uma sequência de elementos que pode ser manipulada
+         *  Map = Uma sequência de elemtos que contém Chave e Valor
+         *  x -> ProfileEnum.toEnum(x) = Percorre a sequência de perfis, executa o metódo toEnum passando o código e obtém o valor no formato ProfileEnum para cada um
+         *  .collect(Collectors.toSet()) = Transforma em formato de lista que a lista Set consiga receber.
+        */
         return this.profiles.stream().map(x -> ProfileEnum.toEnum(x)).collect(Collectors.toSet());
     }
 

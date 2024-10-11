@@ -18,8 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = Task.TABLE_NAME)
 @AllArgsConstructor
@@ -35,7 +33,7 @@ public class Task {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @ManyToOne //Relacionamento com user(uma task para um usuário)
+    @ManyToOne //Relacionamento com user(muitas task para um usuário)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
