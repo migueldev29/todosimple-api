@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.migueldev.todosimple.security.JWTAuthenticationFilter;
 import com.migueldev.todosimple.security.JWTUtil;
 
 @Configuration
@@ -60,7 +61,9 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll() //Autoriza quaqluer requisição de POST informada no PUBLIC_MATCHERS_POST
                 .antMatchers(PUBLIC_MATCHERS).permitAll() //Autoriza quaqluer requisição informada no PUBLIC_MATCHERS
-                .anyRequest().authenticated(); //Para qualquer outra requisição dos endpoints só permitirá se tiver autenticado o usuário, feito o login.
+                .anyRequest().authenticated() //Para qualquer outra requisição dos endpoints só permitirá se tiver autenticado o usuário, feito o login.
+                .and().authenticationManager(authenticationManager);
+        http.addFilter(new JWTAuthenticationFilter(this.authenticationManager, this.jwtUtil));
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //Não cria sessão do lado do servidor.
 

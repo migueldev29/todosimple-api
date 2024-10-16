@@ -10,15 +10,16 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JWTUtil {
 
-    @Value("$(jwt.secret)")
+    @Value("${jwt.secret}")
     private String secret;
     
-    @Value("$(jwt.expiration)")
+    @Value("${jwt.expiration}")
     private Long expiration;
 
     public String generateToken(String username){
@@ -33,6 +34,10 @@ public class JWTUtil {
     private SecretKey getKeyBySecret(){
         SecretKey key = Keys.hmacShaKeyFor(this.secret.getBytes());
         return key;
+        //byte[] keyBytes = Decoders.BASE64.decode(this.secret);
+        //return Keys.hmacShaKeyFor(keyBytes);
+        //SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        //return key;
     }
 
     public boolean isValidToken(String token){
