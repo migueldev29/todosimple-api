@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
@@ -51,6 +50,13 @@ public class JWTUtil {
             }
         }
         return false;
+    }
+
+    public String getUsername(String token) {
+        Claims claims = getClaims(token);
+        if(Objects.nonNull(claims))
+            return claims.getSubject();
+        return null;
     }
 
     private Claims getClaims(String token){
