@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
+//Objeto de usuário logado.
 public class UserSpringSecurity implements UserDetails {
     
     private Long id;

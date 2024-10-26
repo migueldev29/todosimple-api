@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,10 +41,15 @@ public class TaskController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Task>> findAllByUserId(@PathVariable Long userId) {
-        userService.findById(userId);
-        List<Task> objs = this.taskService.findAllByUserId(userId);
+    @GetMapping("/user")
+    public ResponseEntity<List<Task>> findAllByUser() {
+        List<Task> objs = this.taskService.findAllByUser();
+        return ResponseEntity.ok().body(objs);
+    }
+
+    @GetMapping("/findall")
+    public ResponseEntity<List<Task>> findAll() {
+        List<Task> objs = this.taskService.findAll();
         return ResponseEntity.ok().body(objs);
     }
 
