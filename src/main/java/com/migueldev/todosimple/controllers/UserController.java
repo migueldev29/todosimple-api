@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.migueldev.todosimple.models.User;
-import com.migueldev.todosimple.models.User.CreateUser;
-import com.migueldev.todosimple.models.User.UpdateUser;
+import com.migueldev.todosimple.models.dto.UserCreateDTO;
+import com.migueldev.todosimple.models.dto.UserUpdateDTO;
 import com.migueldev.todosimple.services.UserService;
 
 @RestController
@@ -39,20 +37,21 @@ public class UserController {
     }
 
     @PostMapping
-    @Validated(CreateUser.class)
-    public ResponseEntity<Void> create(@Valid @RequestBody User obj){
-        this.userService.create(obj);
+    public ResponseEntity<Void> create(@Valid @RequestBody UserCreateDTO obj){
+        User user = this.userService.fromDTO(obj);
+        User newUser =  this.userService.create(user);
+       
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{id}").buildAndExpand(obj.getId()).toUri();
+            .path("/{id}").buildAndExpand(newUser.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/{id}")
-    @Validated(UpdateUser.class)
-    public ResponseEntity<User> update(@PathVariable Long id, @Valid @RequestBody User obj){
+    public ResponseEntity<User> update(@Valid @RequestBody UserUpdateDTO obj, @PathVariable Long id){
         obj.setId(id);
-        this.userService.update(obj);
-        return ResponseEntity.ok().body(obj);
+        User user = this.userService.fromDTO(obj);
+        this.userService.update(user);
+        return ResponseEntity.ok().body(user);
     }
 
     @DeleteMapping("/{id}")

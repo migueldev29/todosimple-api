@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.migueldev.todosimple.models.Task;
+import com.migueldev.todosimple.models.projection.TaskProjection;
 import com.migueldev.todosimple.services.TaskService;
-import com.migueldev.todosimple.services.UserService;
 
 
 @RestController
@@ -32,9 +32,6 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/{id}")
     public ResponseEntity<Task> findById(@PathVariable Long id) {
         Task obj = this.taskService.findById(id);
@@ -42,14 +39,14 @@ public class TaskController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<Task>> findAllByUser() {
-        List<Task> objs = this.taskService.findAllByUser();
+    public ResponseEntity<List<TaskProjection>> findAllByUser() {
+        List<TaskProjection> objs = this.taskService.findAllByUser();
         return ResponseEntity.ok().body(objs);
     }
 
     @GetMapping("/findall")
-    public ResponseEntity<List<Task>> findAll() {
-        List<Task> objs = this.taskService.findAll();
+    public ResponseEntity<List<TaskProjection>> findAllTasks() {
+        List<TaskProjection> objs = this.taskService.findAllTasks();
         return ResponseEntity.ok().body(objs);
     }
 

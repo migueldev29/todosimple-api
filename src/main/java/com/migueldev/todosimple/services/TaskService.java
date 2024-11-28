@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import com.migueldev.todosimple.models.Task;
 import com.migueldev.todosimple.models.User;
 import com.migueldev.todosimple.models.enums.ProfileEnum;
+import com.migueldev.todosimple.models.projection.TaskProjection;
 import com.migueldev.todosimple.repositories.TaskRepository;
 import com.migueldev.todosimple.security.UserSpringSecurity;
 import com.migueldev.todosimple.services.exception.AuthorizationException;
 import com.migueldev.todosimple.services.exception.DataBindingViolationException;
-import com.migueldev.todosimple.services.exception.InvalidInputException;
 import com.migueldev.todosimple.services.exception.ObjectNotFoundException;
 
 @Service
@@ -39,22 +39,22 @@ public class TaskService {
         return task;
     }
 
-    public List<Task> findAllByUser(){
+    public List<TaskProjection> findAllByUser(){
         UserSpringSecurity userSpringSecurity = UserService.authenticated();
         if (Objects.isNull(userSpringSecurity))
             throw new AuthorizationException("Acesso negado!");
 
-        List<Task> tasks = this.taskRepository.findByUser_Id(userSpringSecurity.getId());
+        List<TaskProjection> tasks = this.taskRepository.findByUser_Id(userSpringSecurity.getId());
         return tasks;
     }
 
-    public List<Task> findAll(){
+    public List<TaskProjection> findAllTasks(){
         UserSpringSecurity userSpringSecurity = UserService.authenticated();
         if (Objects.isNull(userSpringSecurity)
                 || !userSpringSecurity.hasRole(ProfileEnum.ADMIN))
             throw new AuthorizationException("Acesso negado!");
 
-        List<Task> tasks = this.taskRepository.findAll();
+        List<TaskProjection> tasks = this.taskRepository.findAllTasks();
         return tasks;
     }
 
