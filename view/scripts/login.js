@@ -22,13 +22,14 @@ async function login() {
   
     if (response.ok) {
       showToast("#okToast");
+
+      window.setTimeout(function () {
+        window.location = "/view/index.html";
+      }, 2000);
     } else {
       showToast("#errorToast");
     }
-  
-    window.setTimeout(function () {
-      window.location = "/view/index.html";
-    }, 2000);
+
   }
   
   function showToast(id) {
