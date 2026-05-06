@@ -60,7 +60,8 @@ public class SecurityConfig {
         this.authenticationManager = authenticationManagerBuilder.build();
 
         http.authorizeRequests()
-                .antMatchers("/**/*.html", "/css/**", "/js/**", "/images/**").permitAll() // Libera arquivos estáticos e HTML
+                .antMatchers("/**/*.html", "/js/**", "/css/**", "/images/**").permitAll() // Libera arquivos estáticos e HTML
+                .antMatchers("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.svg").permitAll()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll() //Autoriza quaqluer requisição de POST informada no PUBLIC_MATCHERS_POST
                 .antMatchers(PUBLIC_MATCHERS).permitAll() //Autoriza qualquer requisição informada no PUBLIC_MATCHERS
                 .anyRequest().authenticated() //Para qualquer outra requisição dos endpoints só permitirá se tiver autenticado o usuário, feito o login.

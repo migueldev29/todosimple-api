@@ -23,7 +23,7 @@ async function createTask() {
     showToast("success", "Atividade criada com sucesso. Redirecionando para o painel...");
 
     window.setTimeout(function () {
-      window.location = "/view/index.html";
+      window.location = "/index.html";
     }, 2000);
   } else {
     showToast("danger", "Não foi possível criar a atividade. Verifique os dados e tente novamente.");
@@ -32,5 +32,5 @@ async function createTask() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   if (!localStorage.getItem("Authorization"))
-      window.location = "/view/login.html";
+      window.location = "/login.html";
 });

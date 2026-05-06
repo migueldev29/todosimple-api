@@ -19,7 +19,7 @@ function show(tasks) {
     for (let task of tasks) {
     tab += `
             <tr>
-                <td><button type="button" class="btn btn-warning" onclick="window.location = '/view/updatetask.html?id=${task.id}'"><i class="bi bi-pencil-fill"></i> Atualizar</button>
+                <td><button type="button" class="btn btn-warning" onclick="window.location = '/updatetask.html?id=${task.id}'"><i class="bi bi-pencil-fill"></i> Atualizar</button>
                 <td><button type="button" class="btn btn-outline-danger" onclick="deleteTask(this)"><i class="bi bi-x-circle-fill"></i> Deletar</button></td>
                 <td scope="row" id="taskId">${task.id}</td>
                 <td>${task.description}</td>
@@ -50,7 +50,7 @@ async function getTasks() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
     if (!localStorage.getItem("Authorization"))
-        window.location = "/view/login.html";
+        window.location = "/login.html";
 });
 
 //Executa a função getTasks

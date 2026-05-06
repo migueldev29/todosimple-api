@@ -57,7 +57,7 @@ async function updateTask() {
       showToast("success", "Atividade atualizada com sucesso. Redirecionando para o painel...");
 
       window.setTimeout(function () {
-        window.location = "/view/index.html";
+        window.location = "/index.html";
       }, 2000);
     } else {
       showToast("danger", "Não foi possível atualizar a atividade. Verifique os dados e tente novamente.");
@@ -69,5 +69,5 @@ async function updateTask() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   if (!localStorage.getItem("Authorization"))
-    window.location = "/view/login.html";
+    window.location = "/login.html";
 });

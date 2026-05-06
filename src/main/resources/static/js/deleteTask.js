@@ -30,7 +30,7 @@ async function deleteTaskById(taskId) {
       showToast("success", "Atividade deletada com sucesso. Redirecionando para o painel...");
 
       window.setTimeout(function () {
-        window.location = "/view/index.html";
+        window.location = "/index.html";
       }, 500);
     } else {
       showToast("danger", "Não foi possível deletar a atividade. Verifique os dados e tente novamente.");
@@ -43,5 +43,5 @@ async function deleteTaskById(taskId) {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   if (!localStorage.getItem("Authorization"))
-      window.location = "/view/login.html";
+      window.location = "/login.html";
 });

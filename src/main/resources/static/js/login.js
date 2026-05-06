@@ -24,7 +24,7 @@ async function login() {
       showToast("success", "Login efetuado com sucesso. Redirecionando ao painel...");
 
       window.setTimeout(function () {
-        window.location = "/view/index.html";
+        window.location = "/index.html";
       }, 2000);
     } else {
       showToast("danger", "Não foi possível efetuar o login. Verifique suas credenciais e tente novamente.");
