@@ -21,21 +21,13 @@ async function login() {
     window.localStorage.setItem(key, token);
   
     if (response.ok) {
-      showToast("#okToast");
+      showToast("success", "Login efetuado com sucesso. Redirecionando ao painel...");
 
       window.setTimeout(function () {
         window.location = "/view/index.html";
       }, 2000);
     } else {
-      showToast("#errorToast");
+      showToast("danger", "Não foi possível efetuar o login. Verifique suas credenciais e tente novamente.");
     }
 
-  }
-  
-  function showToast(id) {
-    var toastElList = [].slice.call(document.querySelectorAll(id));
-    var toastList = toastElList.map(function (toastEl) {
-      return new bootstrap.Toast(toastEl);
-    });
-    toastList.forEach((toast) => toast.show());
   }

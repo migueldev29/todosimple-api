@@ -17,16 +17,11 @@ async function signup() {
     });
   
     if (response.ok) {
-      showToast("#okToast");
+      showToast("success", "Cadastro realizado com sucesso. Redirecionando para login...");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
     } else {
-      showToast("#errorToast");
+      showToast("danger", "Não foi possível cadastrar o usuário. Verifique os dados e tente novamente.");
     }
-  }
-  
-  function showToast(id) {
-    var toastElList = [].slice.call(document.querySelectorAll(id));
-    var toastList = toastElList.map(function (toastEl) {
-      return new bootstrap.Toast(toastEl);
-    });
-    toastList.forEach((toast) => toast.show());
   }

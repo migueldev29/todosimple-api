@@ -35,8 +35,8 @@ public class Task {
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
-    @Column(name = "description", length = 255, nullable = false)
-    @Size(min = 1, max = 255)
+    @Column(name = "description", length = 1000, nullable = false)
+    @Size(min = 1, max = 1000)
     @NotBlank //@NotEmpty e &NotNull
     private String description;
     

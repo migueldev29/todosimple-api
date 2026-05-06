@@ -2,7 +2,10 @@ async function createTask() {
   let description = document.getElementById("description").value;
   let key = "Authorization";
 
-  console.log(description);
+  if (!description) {
+    showToast("danger", "Descrição não pode ser vazia!"); // Exibe o toast de erro
+    return; // Interrompe a execução da função
+  }
 
   const response = await fetch("http://localhost:8080/task", {
     method: "POST",
@@ -17,22 +20,14 @@ async function createTask() {
   });
 
   if (response.ok) {
-    showToast("#okToast");
+    showToast("success", "Atividade criada com sucesso. Redirecionando para o painel...");
 
     window.setTimeout(function () {
       window.location = "/view/index.html";
     }, 2000);
   } else {
-    showToast("#errorToast");
+    showToast("danger", "Não foi possível criar a atividade. Verifique os dados e tente novamente.");
   }
-}
-  
-function showToast(id) {
-  var toastElList = [].slice.call(document.querySelectorAll(id));
-  var toastList = toastElList.map(function (toastEl) {
-    return new bootstrap.Toast(toastEl);
-  });
-  toastList.forEach((toast) => toast.show());
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {

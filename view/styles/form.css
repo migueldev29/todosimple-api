@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(135deg, #1a1a1a, #252525);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 480px;
+}
+
+.btn-custom {
+    background-color: #6200ea;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-custom:hover {
+    background-color: #3700b3;
+    transform: scale(1.05);
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+a {
+    color: #bb86fc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #9b5de5;
+}

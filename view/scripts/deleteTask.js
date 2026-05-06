@@ -6,8 +6,7 @@ function deleteTask(button) {
   const taskId = row.querySelector('#taskId').textContent;
 
   console.log("Task ID:", taskId);
-
-  // Agora você pode usar o taskId conforme necessário
+  
   deleteTaskById(taskId);
 }
 
@@ -28,26 +27,18 @@ async function deleteTaskById(taskId) {
     });
 
     if (response.ok) {
-      showToast("#successDelete");
+      showToast("success", "Atividade deletada com sucesso. Redirecionando para o painel...");
 
       window.setTimeout(function () {
         window.location = "/view/index.html";
-      }, 1000);
+      }, 500);
     } else {
-      showToast("#errorDelete");
+      showToast("danger", "Não foi possível deletar a atividade. Verifique os dados e tente novamente.");
     }
   } catch (error) {
     console.error("Erro ao deletar tarefa:", error);
-    showToast("#errorDelete");
+    showToast("danger", "Não foi possível deletar a atividade. Verifique os dados e tente novamente.");
   }
-}
-  
-function showToast(id) {
-  var toastElList = [].slice.call(document.querySelectorAll(id));
-  var toastList = toastElList.map(function (toastEl) {
-    return new bootstrap.Toast(toastEl);
-  });
-  toastList.forEach((toast) => toast.show());
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {

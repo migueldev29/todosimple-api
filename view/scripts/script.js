@@ -9,18 +9,18 @@ function hideLoader() {
 function show(tasks) {
     //Cabeçalho da tabela
     let tab = `<thead>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Description</th>
+                    <th scope="col" style="width: 8%"></th>
+                    <th scope="col" style="width: 8%"></th>
+                    <th scope="col" style="width: 5%">Código</th>
+                    <th scope="col">Descrição</th>
                 </thead>`;
 
     //Linhas de dados
     for (let task of tasks) {
     tab += `
             <tr>
-                <td><button type="button" class="btn btn-primary" onclick="window.location = '/view/updatetask.html?id=${task.id}'"><i class="bi bi-pencil-fill"></i>Update</button>
-                <td><button type="button" class="btn btn-outline-danger" onclick="deleteTask(this)"><i class="bi bi-x-circle-fill"></i>Delete</button></td>
+                <td><button type="button" class="btn btn-warning" onclick="window.location = '/view/updatetask.html?id=${task.id}'"><i class="bi bi-pencil-fill"></i> Atualizar</button>
+                <td><button type="button" class="btn btn-outline-danger" onclick="deleteTask(this)"><i class="bi bi-x-circle-fill"></i> Deletar</button></td>
                 <td scope="row" id="taskId">${task.id}</td>
                 <td>${task.description}</td>
             </tr>

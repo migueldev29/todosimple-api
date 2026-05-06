@@ -1,0 +1,39 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+}
+
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    background: #252525;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.table {
+    background-color: #252525;
+    color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.btn-custom {
+    width: 100%;
+    background-color: #6200ea;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #3700b3;
+}
